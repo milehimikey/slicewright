@@ -26,17 +26,27 @@ now **two** dated data points, not one:
 
 | Date | Codebase | Slices | Invariants | Findings | False positives |
 |---|---|---|---|---|---|
-| 2026-07 | (first validated run) | 19 | 58 | 3 seeded, 0 organic | 0 |
-| 2026-08 | Meridian Goods | 8 | 25 | 1 seeded, 3 organic | 0 |
+| 2026-07 | (first validated run) | 19 | 58 | 10, incl. real drift | 0 |
+| 2026-08 | Meridian Goods | 8 | 25 | 4 — 1 seeded, 3 organic | 0 |
 
-Both runs caught every seeded drift, caught real drift nobody planted, and
-produced zero false positives. Both were ratified same-cycle, with dated
-rulings, not left as open findings. That is real, and it's worth saying
+(The 2026-07 cycle also included a separate controlled check that seeded 3
+known drifts; the loop caught 3 of 3.) Both runs caught real drift nobody
+planted and produced zero false positives. Both were ratified same-cycle,
+with dated rulings, not left as open findings. That is real, and it's worth saying
 plainly — but it is two data points, not a track record, and the honest
 version of this claim will keep saying "two runs, dated" for as long as
 that's true, and will update the moment it isn't. A methodology that ships
 a drift-checker and then oversells its own evidence has disqualified
 itself by its own standard.
+
+One more claim earned its evidence late enough to state exactly: the
+implementation contract's agent-neutral path has been **exercised by an
+agent without the bundled skill** — discovery via AGENTS.md, the contract
+via `em contract`, reads via `em export --slice` and the MCP server (whose
+outputs matched the CLI byte-for-byte) — which deleted and re-implemented a
+slice to a green suite with every invariant re-cited. That is one controlled
+exercise, by one agent, still from the same vendor family; a cross-vendor
+run is an open invitation, not a claimed result.
 
 The same discipline applies everywhere else in the register. The 30-slice
 field record where no generated spec was ever hand-edited after generation
