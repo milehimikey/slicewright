@@ -191,3 +191,12 @@ right before going live:
       two local-only frontmatter reverts are the only expected working-tree
       changes, and both get reverted mid-script). No new commits, no
       pushes to `main`.
+
+## Version re-verification (2026-08-27)
+
+All captures in the script were made on em 1.8.0 / em-sdd-bridge 0.4.0 and
+re-verified identical on **em 1.8.1 / bridge 0.4.1** (the current releases;
+both scaffold-template and error-message fixes shipped), with one known
+delta: `em coverage` prints "24 invariant(s) checked" on 1.8.1 (was 25) —
+say "**20 distinct invariants, 0 uncovered**" on stage; the raw attribution
+count is version-specific.

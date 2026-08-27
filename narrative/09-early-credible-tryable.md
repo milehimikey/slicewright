@@ -27,7 +27,11 @@ now **two** dated data points, not one:
 | Date | Codebase | Slices | Invariants | Findings | False positives |
 |---|---|---|---|---|---|
 | 2026-07 | (first validated run) | 19 | 58 | 10, incl. real drift | 0 |
-| 2026-08 | Meridian Goods | 8 | 25 | 4 — 1 seeded, 3 organic | 0 |
+| 2026-08 | Meridian Goods | 8 | 20* | 4 — 1 seeded, 3 organic | 0 |
+
+\*20 distinct invariants, 0 uncovered — the tool's raw attribution count
+varies by version (25 on em 1.8.0, 24 on 1.8.1, which fixed a
+cross-referencing bug); the distinct count is the stable fact.
 
 (The 2026-07 cycle also included a separate controlled check that seeded 3
 known drifts; the loop caught 3 of 3.) Both runs caught real drift nobody
