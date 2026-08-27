@@ -582,7 +582,7 @@ paraphrase looser than that on stage.
 | Date | Slices | Invariants | Findings | False positives |
 |---|---|---|---|---|
 | 2026-07 | 19 | 58 | 10, incl. real drift | 0 |
-| 2026-08 | 8 | 25 | 4 — 1 seeded, 3 organic | 0 |
+| 2026-08 | 8 | 20* | 4 — 1 seeded, 3 organic | 0 |
 
 Both runs caught real drift nobody planted and produced zero false
 positives. Both were ratified same-cycle, with dated rulings.
