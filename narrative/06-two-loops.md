@@ -94,13 +94,22 @@ code against a ratified contract, a conform run drafting a finding for a
 human to judge.
 
 The same deterministic core is now reachable two ways. `em`'s npm package
-ships a second bin, `em-mcp`, exposing seven read-only tools
+ships a second bin, `em-mcp`, exposing thirteen read-only tools
 (`validate`, `slice_ready`, `list_markers`, `export_model`, `export_slice`,
-`coverage`, `contract`) over stdio — not a separate product, the same
-package, same version, same JSON builders underneath. Calling `slice_ready`
-over MCP and calling `validate --slice-ready --json` over the CLI on the
-same model, same moment, produces byte-identical output (modulo a trailing
-newline the CLI adds and MCP's transport doesn't). One schema, two doors in.
+`coverage`, `status`, `diff`, `glossary`, `changelog`, `conform_scope`,
+`freshness`, `contract`) over stdio — not a separate product, the same
+package, same version, same JSON builders underneath. That parity is now a
+standing rule the project holds itself to, not just a fact that happened to
+be true: every read surface `em` ships has to reach agents both ways — a
+CLI `--json` flag and an MCP tool, byte-identical for the same input — in
+the same release, not as a follow-up. The reasoning is structural, not
+tidiness: for an agent, MCP *is* the conversation channel to this tool, so
+a surface that only speaks CLI is invisible to exactly the audience this
+story is written for. Calling `slice_ready` over MCP and calling `validate
+--slice-ready --json` over the CLI on the same model, same moment, produces
+byte-identical output (modulo a trailing newline the CLI adds and MCP's
+transport doesn't). One schema, two doors in — for every surface, not a
+subset of them.
 
 ## Agents propose, humans ratify, machines check
 
