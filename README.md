@@ -46,6 +46,15 @@ The narrative runs nine beats, one file per beat:
   ratified `em` slice doc straight into a spec-kit-based SDD flow, either as
   a real filesystem symlink or a generated spec with literal invariant
   back-references. [Source](https://github.com/milehimikey/em-sdd-bridge).
+- [`em-portal`](https://github.com/milehimikey/em-portal) — **0.1.0, in
+  development, not yet on npm.** A separate, fully static site built from
+  `em export`/`em status` JSON: a read-only multi-model browser with a
+  status-first landing page. Decided and scaffolded, not yet exercised by
+  a real pilot — see [narrative/09](narrative/09-early-credible-tryable.md).
+- `em-tracker-bridge` — **0.1.0, in development, no public repo yet.**
+  The same thin-adapter shape as `em-sdd-bridge`, aimed at an org's issue
+  tracker (Linear first) instead of an SDD tool: mirrors a ratified slice's
+  lifecycle status into it without `em` itself becoming a tracker.
 
 ## The proof artifact
 

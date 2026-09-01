@@ -30,8 +30,10 @@ now **two** dated data points, not one:
 | 2026-08 | Meridian Goods | 8 | 20* | 4 — 1 seeded, 3 organic | 0 |
 
 \*20 distinct invariants, 0 uncovered — the tool's raw attribution count
-varies by version (25 on em 1.8.0, 24 on 1.8.1, which fixed a
-cross-referencing bug); the distinct count is the stable fact.
+varies by version (25 on em 1.8.0, 24 on 1.8.1, 20 on this release, which
+fixed a wrapped-continuation-line overcount). This release is the first
+where the raw count and the distinct count agree; the distinct count was
+always the stable fact, and now it's also the number the tool prints.
 
 (The 2026-07 cycle also included a separate controlled check that seeded 3
 known drifts; the loop caught 3 of 3.) Both runs caught real drift nobody
@@ -60,6 +62,45 @@ honest gap, not a quiet omission. The claim that structural completeness
 checking beats prose backlogs at catching whole classes of drift is
 argued from mechanism, not measured in an A/B test, and it's labeled that
 way every time it appears.
+
+## The toolchain is growing; here's exactly how far each piece got
+
+Everything above describes `em` and `em-sdd-bridge`, both shipped and both
+exercised on Meridian Goods. This release adds two more pieces, and this
+story states their status at the same size it states everything else's:
+*decided and prototyped* is not the same claim as *shipped and run*.
+
+**`em-portal`** is a separate package, version 0.1.0, not yet on npm — a
+fully static site over `em export`/`em status` JSON meant to give a
+non-technical stakeholder a guided first read of a team's own model
+instead of a generic legend, a status line instead of a slice list to
+scroll, and navigation across more than one model. The decision to build
+it as a separate tool rather than reworking `em catalog` is made and
+written down, and a throwaway prototype benchmarked the approach up to
+1,219 slices across 20 models (sub-100ms, in-process) to confirm the
+`em export`/`em status` substrate isn't the bottleneck at that scale. The
+0.1.0 scaffold itself — CLI, a status-first landing page, per-model and
+per-slice pages, deterministic builds — exists as real, tested code; the
+guided-teaching layer and async review intake are later, still-unbuilt
+milestones on the same project. No pilot has opened any of it yet.
+
+**`em-tracker-bridge`** is also 0.1.0, also in development, with no public
+repository yet — the same thin-adapter shape `em-sdd-bridge` already
+proved for spec-kit, aimed at an org's issue tracker instead: mirroring a
+slice's lifecycle status (ratified, implemented, drift found) into Linear
+first, Jira later, without `em` itself becoming a tracker. It exists today
+as a scoped project with milestones, not as code that has synced a single
+real slice to a real tracker.
+
+Both are named here for the same reason the conformance loop's evidence is
+stated as "two runs, dated" instead of "proven": a reader deciding whether
+to pilot this toolset deserves to know which pieces have a dated run
+behind them and which ones are still a decision record and a prototype.
+The piece of the surrounding machinery that *has* shipped and run — the
+`em status` line and the conformance-report freshness stamp, both
+exercised for real on Meridian Goods ahead of this release — is Beat 08's
+evidence, not this one's; this beat only tracks the parts still short of
+that bar.
 
 ## What we're asking for
 

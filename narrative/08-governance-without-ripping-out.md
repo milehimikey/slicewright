@@ -19,6 +19,18 @@ it before touching code. On Meridian Goods, this gate ran on all eight
 slices before a line of Kotlin existed. `docs/process.md`'s maxim: "Agents
 propose. Humans ratify."
 
+That maxim used to name a step, not a person — a passing gate said *a*
+human ratified, not *which* one. `em slice ratify --by "<name>"` closes
+that gap: it flips `status` to `ready-to-implement` and records
+`ratifiedBy`/`ratifiedOn` directly in the slice doc's own frontmatter, and
+it refuses to silently overwrite a different name already recorded there,
+the same discipline `mark-implemented` already holds for a PR URL. A
+documented `CODEOWNERS` entry on `slices/**` routes that flip through a
+designated ratifier's review before it can merge at all. Neither piece
+stops someone editing the YAML by hand outside that routing — nothing in
+a plain-text, git-native tool can — but the *intended* path is now the one
+that also leaves a name and a date, not just a timestamp on a commit.
+
 ## Pillar 2 — Evidence-cited drift reports, never auto-applied
 
 **The fear**: an AI silently rewrites your system of record based on its
@@ -32,6 +44,17 @@ a `Proposed red note` a human either ratifies or rejects, and a line at the
 bottom of the file that reads, honestly, "none yet — awaiting
 ratification" until a human actually rules. Nothing in the loop writes to
 the ratified model without that step.
+
+A ruled report is still a snapshot, and a snapshot left unlabeled starts
+lying the moment the next commit lands — Beat 7's own citations are a
+case in point. `em conform-supersede` closes that gap by stamping a ruled
+report with a "superseded as of `<revision>`" banner the moment its
+findings are ratified, so a reader who finds it later — a search hit, a
+link from an old PR — sees immediately that its file:line citations
+describe an ancestor of the current model, not its current state. It's an
+additive splice, never a rewrite: every byte of the report after that one
+inserted line survives untouched, so the report stays real history, not a
+document quietly edited into looking current.
 
 ## Pillar 3 — Decision lifecycle and lineage
 
@@ -61,6 +84,34 @@ runs of the same command, once between the CLI and the MCP server reading
 the same model at the same moment. An auditor can trust what the tool
 proved without trusting any model's output, and there's no hosted service
 or model vendor to depend on: plain text, git-native, works offline.
+
+## The state-of-the-system line
+
+None of the four pillars above answer the question a reader actually opens
+this repo to ask: **is this system healthy, right now?** Before this
+release that answer lived nowhere as a single fact — it had to be
+assembled by hand from a README table, a conformance report, and a state
+file, at least one of which is hand-maintained and can go stale without
+anyone noticing (Meridian Goods' own generated Slices table did exactly
+that — a real, dated finding, not a hypothetical). `em status` closes
+that gap with one deterministic line, and it isn't hypothetical either —
+it's the real output on Meridian Goods, run against this release ahead of
+its own launch:
+
+```
+8/8 implemented · 20/20 invariants covered · 0 open issues · last conformed
+8f12ed8 — 11 commits and 0 slice-PRs behind HEAD
+```
+
+Same posture as everything else in this story: no LLM, byte-deterministic
+for identical input, and it renders as a markdown block or an SVG badge a
+README can embed instead of a paragraph someone has to keep rewriting by
+hand — this exact repository now carries both. `em ci init` does the same
+kind of work for the CI side of the cookbook this beat already promised:
+validate, the readiness gate, coverage, a badge rebuild, an advisory
+conform cadence — from a page of YAML a team used to copy-paste by hand to
+one command that installs it, marker-delimited so a team's own additions
+survive the next `em` upgrade.
 
 ## Interface, don't adopt
 

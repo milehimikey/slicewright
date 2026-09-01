@@ -172,6 +172,16 @@ right before going live:
       an optional flag — script the full command
       (`em coverage meridian-goods.em --tests src/test --strict`), don't
       ad-lib it live or the command errors on stage.
+- [ ] **"Does em have a status line / dashboard now?" is a yes, not covered
+      by this script.** As of em 1.9.0, `em status` prints exactly that —
+      real output on this repo is `8/8 implemented · 20/20 invariants
+      covered · 0 open issues · last conformed 8f12ed8 — 11 commits and 0
+      slice-PRs behind HEAD` — plus `em freshness` for just the
+      conformance clause, `em slice ratify --by "<name>"` for named
+      ratification, and `em ci init` for the CI preset. All real, all
+      validated against this exact repository ahead of release. None of
+      it is in this script because the script is locked to an earlier
+      pin — say so plainly rather than improvising a beat live.
 - [ ] **`em migrate` is a Q&A asset, not a scripted beat.** If asked "what
       happens to an old two-slice-shape model," have the before/after
       ready: `em migrate <file>` (dry run) reports what it would move,
@@ -200,3 +210,42 @@ both scaffold-template and error-message fixes shipped), with one known
 delta: `em coverage` prints "24 invariant(s) checked" on 1.8.1 (was 25) —
 say "**20 distinct invariants, 0 uncovered**" on stage; the raw attribution
 count is version-specific.
+
+## Version note (2026-08-28, em 1.9.0)
+
+This script is **not** re-locked to em 1.9.0 — none of its beats are
+factually broken by it, but a presenter running against a 1.9.0 clone
+should know about four deltas before fielding a question on them:
+
+- **`em coverage` now prints "20 invariant(s) checked"** on Meridian Goods
+  (was 24 on 1.8.1) — a second overcount fix, on wrapped continuation
+  lines this time. The raw count now equals the distinct count for the
+  first time; keep saying "20 distinct invariants, 0 uncovered" on stage,
+  it's now also literally what the tool prints.
+- **Beat 9b's "exactly 7 read-only tools" is a dated capture, not a
+  current fact.** `em-mcp`'s `tools/list` returns 13 tools on 1.9.0
+  (`diff`, `glossary`, `changelog`, `conform_scope`, `freshness`, and
+  `status` joined the original seven), under a stated MCP-parity
+  invariant the project now holds itself to going forward. Don't ad-lib
+  "exactly 7" as a current fact if presenting from a 1.9.0 checkout — say
+  "seven at the versions this talk is pinned to; the count has grown
+  since, under a standing parity rule."
+- **A fresh `em skill install --force` on a 1.9.0 clone whose skill
+  bundle predates the 6-directory split will not clean up the old
+  bundle** — orphaned `reference/`/`templates/` files under
+  `.claude/skills/event-modeling/` make `em skill check` report
+  mismatches until `em skill sync` runs instead. Real rough edge, found
+  validating 1.9.0-pre against `meridian-goods` — don't run `em skill
+  install --force` live on an old clone as a demo of the skill bundle;
+  use `sync`, or don't touch it live at all.
+- **A freshly regenerated Slices table gains a "Ratified by" column** (new
+  in 1.9.0, from each doc's `ratifiedBy` frontmatter) — none of Meridian
+  Goods' eight slice docs carry that field yet, so every cell reads `—`.
+  If `em slice index` gets re-run live during Beat 4 or 16 on a 1.9.0
+  build, expect this column to appear with empty cells; that's real
+  staleness in the demo repo's own docs, not a rendering bug, and it's
+  fine to say so on stage.
+
+None of this is in scope for the locked beats above — it's here so a
+Q&A answer doesn't contradict what a curious attendee just checked on
+their own laptop.
