@@ -51,10 +51,11 @@ The narrative runs nine beats, one file per beat:
   `em export`/`em status` JSON: a read-only multi-model browser with a
   status-first landing page. Decided and scaffolded, not yet exercised by
   a real pilot — see [narrative/09](narrative/09-early-credible-tryable.md).
-- `em-tracker-bridge` — **0.1.0, in development, no public repo yet.**
-  The same thin-adapter shape as `em-sdd-bridge`, aimed at an org's issue
-  tracker (Linear first) instead of an SDD tool: mirrors a ratified slice's
-  lifecycle status into it without `em` itself becoming a tracker.
+- [`em-tracker-bridge`](https://github.com/milehimikey/em-tracker-bridge) —
+  **0.1.0, in development, not yet on npm.** The same thin-adapter shape as
+  `em-sdd-bridge`, aimed at an org's issue tracker (Linear first) instead of
+  an SDD tool: mirrors a ratified slice's lifecycle status into it without
+  `em` itself becoming a tracker.
 
 ## The proof artifact
 
@@ -72,3 +73,9 @@ whole loop — model, gate, implement, conform, ratify — is the complete
 pipeline; there's nothing else to install underneath it. See
 [narrative/09](narrative/09-early-credible-tryable.md) for exactly what
 we're asking a pilot for.
+
+Ready to actually run one? [`playbook/`](playbook/) is the adoption
+playbook: pilot selection criteria, the four roles, a week-by-week 4-week
+arc with verified commands, the metrics a pilot commits to collecting, and
+the governance mapping for your review board — everything a team that has
+never seen `em` needs to start from the playbook alone.
