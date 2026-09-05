@@ -162,10 +162,10 @@ reality.**
   (`docBound`, `frontmatterUsable`, `statusReady`, `noUncheckedOpenQuestions`);
   exit 0 only when all four pass.
 - `em contract` — prints the implementation contract the agent works from.
-- The MCP server (`em-mcp`, 13 read-only tools, byte-identical to their CLI
+- The MCP server (`em-mcp`, 15 read-only tools, byte-identical to their CLI
   equivalents): `validate`, `slice_ready`, `list_markers`, `export_model`,
-  `export_slice`, `coverage`, `contract`, `status`, `diff`, `glossary`,
-  `changelog`, `conform_scope`, `freshness`.
+  `export_slice`, `coverage`, `contract`, `status`, `query`, `system`,
+  `diff`, `glossary`, `changelog`, `conform_scope`, `freshness`.
 - `em coverage <model> --tests <dir> --strict` — fails unless every
   `INV-*` invariant is cited by a test.
 - `em slice mark-implemented <model> <key> <pr-url>` — idempotent on the
