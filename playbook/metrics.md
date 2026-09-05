@@ -18,7 +18,7 @@ vaguer later, is itself part of the honesty the whole methodology is
 built on. This document is that promise kept — the operational form of
 the same four metrics, nothing added and nothing substituted.
 
-No `em metrics` command exists in em 1.9.1. Everything below is a
+No `em metrics` command exists in em 1.10.0. Everything below is a
 procedure a person runs by hand, on a cadence, against artifacts `em`
 already produces. A future em release may automate some of this
 collection; until it does, collecting these four numbers by hand is part
@@ -66,7 +66,7 @@ last cleared `ratifiedBy:`) to the commit where `em slice ratify --by`
 set it again.
 
 **Command pattern** (verified against a scratch model and slice doc,
-`em 1.9.1`, `git log` on the resulting repo):
+`em 1.10.0`, `git log` on the resulting repo):
 
 ```bash
 # the commit that first added the slice doc

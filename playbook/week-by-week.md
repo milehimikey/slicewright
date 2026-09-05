@@ -8,7 +8,7 @@ slices modeled, ratified, implemented, and checked once against the running
 code, plus a first data point for each of the four pilot metrics and a
 go/no-go decision.
 
-Every command below is quoted exactly as it runs against `@milehimikey/em@1.9.1`
+Every command below is quoted exactly as it runs against `@milehimikey/em@1.10.0`
 and `em-sdd-bridge@0.4.1` — verified in scratch space against the published
 packages, not transcribed from memory. Roles are named but not re-described
 here; see [`roles.md`](roles.md) for responsibilities, time commitment, and
@@ -21,14 +21,14 @@ Do this once, before Week 1 starts.
 **Install, pinned:**
 
 ```sh
-npm install -g @milehimikey/em@1.9.1
+npm install -g @milehimikey/em@1.10.0
 ```
 
 Or run any command via `npx` without a global install — pin the version on
 every invocation:
 
 ```sh
-npx @milehimikey/em@1.9.1 <command>
+npx @milehimikey/em@1.10.0 <command>
 ```
 
 Bridge-first teams: nothing to run for the bridge today — its first real
@@ -110,31 +110,36 @@ cron + manual-dispatch, advisory-only conform sweep — see Week 4). Both
 files are marker-delimited and idempotent; rerun with `--check` any time to
 verify they still match the current preset without writing.
 
-**Sharp edge — pin the generated version, by hand, before you commit either
-file.** `em ci init` scaffolds *unpinned* installs in both workflows:
+**Version pinning is automatic at `@milehimikey/em@1.10.0` and later.** `em
+ci init` scaffolds every `npx @milehimikey/em@<command>` line in
+`em-ci.yml`, and the `npm i -g @milehimikey/em@<version>` line in
+`em-conform.yml`, already pinned to the exact version of `em` that generated
+them — there's no hand-pinning step left to run. Verify it rather than
+trust it, since it costs nothing:
 
-- `em-ci.yml`'s job steps all run `npx @milehimikey/em <command>` — no
-  version, floats to whatever `latest` resolves to on the runner that day.
-  Edit every `run:` line to `npx @milehimikey/em@1.9.1 <command>`.
-- `em-conform.yml`'s conform job runs `npm i -g @milehimikey/em@1
-  @anthropic-ai/claude-code` — pinned to the `1` major only. Edit it to
-  `npm i -g @milehimikey/em@1.9.1 @anthropic-ai/claude-code`.
+```sh
+em ci init <model>.em --tests <dir> --check
+```
 
-Neither file will drift on its own once pinned; the risk is only at
-scaffold time, and only if this step gets skipped.
+prints `ok — both workflow files match the current preset` when the pins
+are current; it never writes, so it's safe to run any time, including as a
+CI check of its own. (If your team is still on `em` 1.9.x: scaffolds from
+that version are unpinned — a floating `npx @milehimikey/em <command>` and
+a major-only `npm i -g @milehimikey/em@1` — so either pin every generated
+`run:` line by hand before committing, or upgrade to 1.10.0 first and
+re-run `em ci init` to get the self-pinned files for free.)
 
 **Week 0 exit criteria:**
 
-- [ ] `em --version` prints `1.9.1` (or `npx @milehimikey/em@1.9.1 --version`
-      resolves without error)
+- [ ] `em --version` prints `1.10.0` (or `npx @milehimikey/em@1.10.0
+      --version` resolves without error)
 - [ ] a `.em` model file exists in the repo (`em scaffold` or `em init`)
 - [ ] `.claude/skills/event-modeling*` exists and `AGENTS.md` has a managed
       agent-contract section
 - [ ] `CODEOWNERS` names a ratifier team on `slices/**`, and branch
       protection requires their review on that path
-- [ ] `.github/workflows/em-ci.yml` and `em-conform.yml` exist, and every
-      `npx @milehimikey/em` / `npm i -g @milehimikey/em` line in both is
-      pinned to `@1.9.1`, not floating
+- [ ] `.github/workflows/em-ci.yml` and `em-conform.yml` exist, and
+      `em ci init <model>.em --tests <dir> --check` reports `ok` for both
 
 ## Week 1 — Model and ratify the first slice(s)
 
@@ -298,7 +303,7 @@ em contract
 
 (or the MCP server's `contract` tool — same content, either transport; see
 [em's docs/mcp.md](https://github.com/milehimikey/em/blob/main/docs/mcp.md)
-for the parity invariant, 13 read-only tools total). Implement the
+for the parity invariant, 15 read-only tools total). Implement the
 slice, writing tests that cite `INV-<MNEMONIC>-<n>` ids, then:
 
 ```sh
@@ -339,9 +344,13 @@ one slice can treat this as optional — the point of a one-slice pilot is
 the bridge mechanics, not slice count). Same commands, not repeated here.
 
 **The change cycle.** Pick a real change request against a slice already
-`implemented`. Facilitator and ratifier decide the change together, then
-hand-write a `## Delta` section in the slice doc recording what changed and
-why — this is a judgment section `em` never writes for you. Then:
+`implemented`. Before the facilitator and ratifier decide the change, see
+what it would touch: `em query downstream <model>.em --of "<element name>"`
+walks the transitive closure of legal edges from the element the change
+starts at — consumers, downstream views, reactions — one command instead of
+tracing the diagram by eye. Then decide the change together, and hand-write
+a `## Delta` section in the slice doc recording what changed and why — this
+is a judgment section `em` never writes for you. Then:
 
 ```sh
 em slice reratify <model>.em <slice-key>

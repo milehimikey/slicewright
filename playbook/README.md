@@ -10,7 +10,7 @@ states everything: **no pilot has run yet.** This playbook was designed in
 advance — the roles, the arc, the metrics were all written before the first
 team tried them, and every time estimate in it says so. What is *not*
 designed-in-advance: every command in these documents was verified against
-the published `@milehimikey/em@1.9.1` and `em-sdd-bridge@0.4.1` packages
+the published `@milehimikey/em@1.10.0` and `em-sdd-bridge@0.4.1` packages
 before it was written down. The procedures are untested as a whole; the
 commands are not.
 
